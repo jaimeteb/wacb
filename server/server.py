@@ -30,6 +30,10 @@ def chat():
     text_to = data["To"]
     text_body = data["Body"]
 
+    logging.info(text_from)
+    logging.info(text_to)
+    logging.info(text_body)
+
 
     req = requests.post(
         f"http://{rasa_server}:5005/webhooks/rest/webhook",
