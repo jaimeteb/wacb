@@ -34,7 +34,7 @@ def chat():
     req = requests.post(
         f"http://{rasa_server}:5005/webhooks/rest/webhook",
         data = json.dumps({
-            "sender": text_from,
+            "sender": text_from.split("+")[1],
             "message": text_body
         }),
         headers = {
