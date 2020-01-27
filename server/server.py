@@ -26,13 +26,13 @@ def chat():
 
     logging.info(rawdata)
     data = rawdata.to_dict(flat=False)
-    text_from = data["From"]
-    text_to = data["To"]
-    text_body = data["Body"]
+    text_from = data["From"][0]
+    text_to = data["To"][0]
+    text_body = data["Body"][0]
 
-    logging.info(text_from)
-    logging.info(text_to)
-    logging.info(text_body)
+    # logging.info(text_from)
+    # logging.info(text_to)
+    # logging.info(text_body)
 
 
     req = requests.post(
