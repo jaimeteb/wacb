@@ -23,6 +23,7 @@ app = Flask(
 def chat():
     rawdata = request.form
 
+    logger.info(rawdata)
     data = rawdata.to_dict(flat=False)
     text_from = data["From"]
     text_to = data["To"]
