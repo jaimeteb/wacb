@@ -9,6 +9,7 @@ logging.basicConfig(level=logging.INFO)
 
 account_sid = "AC7bfa7dbfd372dd3e5a82219c5d37c6e8"
 auth_token = "c641a842efaf6a54ecdb1e3ee71bcf80"
+rasa_server = "rasa"
 
 client = Client(account_sid, auth_token)
 
@@ -27,13 +28,28 @@ def chat():
     text_to = data["To"]
     text_body = data["Body"]
 
-    message = client.messages.create(
-        body=text_body,
-        from_=text_to,
-        to=text_from
+
+    req = requests.post(
+        f"http://{rasa_server}:5005/webhooks/rest/webhook",
+        data = json.dumps({
+            "sender": text_from,
+            "message": text_body
+        }),
+        headers = {
+            "Content-type": "application/json",
+            "Accept": "text/plain"
+        }
     )
 
-    # logging.info(data)
+    res = json.loads(req.text)
+    for msg in res:
+        logging.info(msg["text"])
+        message = client.messages.create(
+            body=msg["text"],
+            from_=text_to,
+            to=text_from
+        )
+
     return Response(status = 200)
 
 
