@@ -1,0 +1,12 @@
+version: "2"
+
+services:
+  server:
+    build: server
+    ports:
+      - "80:5000"
+
+  rasa:
+    build: moodbot
+    ports:
+      - "5005:5005"

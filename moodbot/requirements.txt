@@ -1,0 +1,4 @@
+tensorflow==1.15.0
+sanic==19.9.0
+rasa==1.4.3
+spacy==2.2.1
