@@ -8,8 +8,8 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 logging.basicConfig(level=logging.INFO)
 
-account_sid = "AC7bfa7dbfd372dd3e5a82219c5d37c6e8"
-auth_token = "c641a842efaf6a54ecdb1e3ee71bcf80"
+account_sid = os.environ["TWILIO_ACCOUNT_SID"]
+auth_token = os.environ["TWILIO_AUTH_TOKEN"]
 rasa_server = "rasa"
 
 client = Client(account_sid, auth_token)
@@ -29,10 +29,6 @@ def chat():
     text_from = data["From"][0]
     text_to = data["To"][0]
     text_body = data["Body"][0]
-
-    # logging.info(text_from)
-    # logging.info(text_to)
-    # logging.info(text_body)
 
 
     req = requests.post(
